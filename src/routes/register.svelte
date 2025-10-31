@@ -1,16 +1,21 @@
 <script>
-	import { goto, stores } from '@sapper/app';
-	import { post } from 'api.js';
+    import { goto, stores } from '@sapper/app';
+    import { post } from 'api.js';
 
-	const { session } = stores();
+    const { session } = stores();
 
-	let username = '';
-	let name = '';
-	let password = '';
-	let error = null;
+    let username = '';
+    let name = '';
+    let firstName = '';
+    let lastName = '';
+    let email = '';
+    let password = '';
+    let error = null;
 
-	async function submit(event) {
-        const response = await post('users', { username, name, password });        
+    //$: firstName = name;
+
+    async function submit(event) {
+        const response = await post('users', { username, name,firstName ,password, lastName, email });
         error = response.error;
 
         if (response.user) {
@@ -18,11 +23,10 @@
             goto('/');
         }
     }
-		
 </script>
 
 <svelte:head>
-	<title>Sign up • BarBank</title>
+    <title>Sign up • BarBank</title>
 </svelte:head>
 
 <div class="auth-page">
@@ -46,6 +50,18 @@
                     <fieldset class="form-group">
                         <input class="form-control form-control-lg" type="text" required placeholder="Name"
                                bind:value={name}>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input class="form-control form-control-lg" type="text" required placeholder="First Name"
+                               bind:value={firstName}>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input class="form-control form-control-lg" type="text" required placeholder="Last Name"
+                               bind:value={lastName}>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input class="form-control form-control-lg" type="email" required placeholder="Email"
+                               bind:value={email}>
                     </fieldset>
                     <fieldset class="form-group">
                         <input class="form-control form-control-lg" type="password" required placeholder="Password"

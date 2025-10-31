@@ -26,7 +26,12 @@
         Loading...
     {:then my}
         <section>
-            <p style="font-size: xx-large">{my.name}</p>
+            <p style="font-size: xx-large">
+                Hello {my.username} <br>
+                First Name: {my.firstName} <br>
+                Last Name: {my.lastName} <br>
+                Email: {my.email}
+            </p>
         </section>
         <section>
             My funds
@@ -42,7 +47,7 @@
 
         <section>
             {#await getTransactions()}
-            Loading...
+                Loading...
             {:then transactions}
                 <table class="table table-striped table-bordered">
                     <thead>
@@ -62,9 +67,9 @@
                             <td><b>{transaction.status}</b><br>{transaction.statusDetail}</td>
                         </tr>
                     {/each}
-                </tbody>
-            </table>
-        {/await}
-    </section>
+                    </tbody>
+                </table>
+            {/await}
+        </section>
     {/await}
 {/if}
